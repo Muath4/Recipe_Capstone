@@ -19,9 +19,8 @@ import com.squareup.picasso.Picasso;
 
 public class RecyclerAdapterOfResults extends RecyclerView.Adapter<RecyclerAdapterOfResults.ViewHolder> {
     public static final String INTENT_OF_MOVE_RESULT_TO_DETAIL_ACTIVITY = "moveResultToDetailActivity";
-    public static final String INTENT_OF_MOVE_PATH_TO_DETAIL_ACTIVITY = "movePathToDetailActivity";
-    private RecipeResponse recipeResponse;
-    private Context context;
+    private final RecipeResponse recipeResponse;
+    private final Context context;
 
     public RecyclerAdapterOfResults(RecipeResponse recipeResponse, Context context) {
         this.recipeResponse = recipeResponse;
@@ -40,14 +39,13 @@ public class RecyclerAdapterOfResults extends RecyclerView.Adapter<RecyclerAdapt
         holder.name.setText(recipeResponse.getResults().get(position).getTitle());
         final String path = recipeResponse.getResults().get(position).getThumbnail().replace("\\", "");
         if (!path.isEmpty())
-            Picasso.get().load(recipeResponse.getResults().get(position).getThumbnail()).into(holder.imageView);
+            Picasso.get().load(path).into(holder.imageView);
 
         holder.item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, RecipeDetailActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.putExtra(INTENT_OF_MOVE_RESULT_TO_DETAIL_ACTIVITY,recipeResponse.getResults().get(position));
-                intent.putExtra(INTENT_OF_MOVE_PATH_TO_DETAIL_ACTIVITY,path);
+                intent.putExtra(INTENT_OF_MOVE_RESULT_TO_DETAIL_ACTIVITY, recipeResponse.getResults().get(position));
                 context.startActivity(intent);
             }
         });
@@ -60,9 +58,9 @@ public class RecyclerAdapterOfResults extends RecyclerView.Adapter<RecyclerAdapt
 
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        private ImageView imageView;
-        private TextView name;
-        private LinearLayout item;
+        private final ImageView imageView;
+        private final TextView name;
+        private final LinearLayout item;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);

@@ -34,16 +34,11 @@
     </com.google.android.material.appbar.AppBarLayout>
 
 
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerResults"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:listitem="@layout/item">
-
-
-
-    </androidx.recyclerview.widget.RecyclerView>
+        tools:listitem="@layout/item" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
